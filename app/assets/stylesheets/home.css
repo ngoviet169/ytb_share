@@ -1,0 +1,13 @@
+.user-action-menu {
+    width: 50%;
+}
+
+.user-action-menu .btn {
+    white-space: nowrap;
+    margin-left: 10px;
+}
+
+.login-form .form-control {
+    width: 40%;
+    margin: 0 10px;
+}
