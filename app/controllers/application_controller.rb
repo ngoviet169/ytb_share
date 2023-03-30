@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if !logged_in?
-      redirect_to login_path
+      redirect_to home_index_path
     end
   end
 end

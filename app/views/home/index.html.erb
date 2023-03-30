@@ -17,11 +17,49 @@
               <div class="video-auth">
                 <span>Share by: <%= video.auth %></span>
               </div>
-              <div class="react">
-                <%= thumb_up_filled %>
-                <%= thumb_down_filled %>
-                <%= thumb_up %>
-                <%= thumb_down %>
+              <div class="react d-flex align-items-center">
+                <% if logged_in? && video.reacted?(current_user) %>
+                  <% if video.liked? current_user %>
+                    <div class="total-like">
+                      <a href="<%= like_video_path(video.id) %>">
+                        <%= thumb_up_filled %>
+                      </a>
+                      <%= video.total_like %>
+                    </div>
+                    <div>
+                      <a href="<%= dislike_video_path(video.id) %>">
+                        <%= thumb_down %>
+                      </a>
+                      <%= video.total_dislike %>
+                    </div>
+                  <% else %>
+                    <div class="total-like">
+                      <a href="<%= like_video_path(video.id) %>">
+                        <%= thumb_up %>
+                      </a>
+                      <%= video.total_like %>
+                    </div>
+                    <div>
+                      <a href="<%= dislike_video_path(video.id) %>">
+                        <%= thumb_down_filled %>
+                      </a>
+                      <%= video.total_dislike %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class="total-like">
+                    <a href="<%= like_video_path(video.id) %>">
+                      <%= thumb_up %>
+                    </a>
+                    <%= video.total_like %>
+                  </div>
+                  <div>
+                    <a href="<%= dislike_video_path(video.id) %>">
+                      <%= thumb_down %>
+                    </a>
+                    <%= video.total_dislike %>
+                  </div>
+                <% end %>
               </div>
               <div class="desc">
                 <span>Description:</span>
