@@ -8,4 +8,6 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6, maximum: 30 }
 
   has_secure_password
+
+  has_many :videos
 end

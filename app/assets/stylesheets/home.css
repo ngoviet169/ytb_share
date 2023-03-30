@@ -11,3 +11,29 @@
     width: 40%;
     margin: 0 10px;
 }
+
+.video-item {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.video-item .item {
+    height: 225px;
+}
+
+.item.info {
+    border: 1px solid rgba(0, 0, 0, 0.175);
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.video-title span {
+    color: red;
+}
+
+.react svg {
+    cursor: pointer;
+}
