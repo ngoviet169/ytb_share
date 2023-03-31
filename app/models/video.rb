@@ -1,7 +1,7 @@
 class Video < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   validates :description, presence: true, length: { maximum: 250 }
-  validates :video_id, presence: true
+  validates :ytb_video_id, presence: true
   validates :auth, presence: true
 
   belongs_to :user
@@ -12,7 +12,7 @@ class Video < ApplicationRecord
   end
 
   def auth
-    self.user.email
+    self.user&.email
   end
 
   def total_like
