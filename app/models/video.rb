@@ -1,7 +1,7 @@
 class Video < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   validates :description, presence: true, length: { maximum: 250 }
-  validates :ytb_video_id, presence: true
+  validates :ytb_video_id, presence: true, uniqueness: { case_sensitive: false }
   validates :auth, presence: true
 
   belongs_to :user

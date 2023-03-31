@@ -1,0 +1,60 @@
+<div class="share-video-page">
+  <div class="form">
+    <fieldset class="reset">
+      <legend class="reset">Share a Youtube movie</legend>
+      <%= form_with model: @video, url: videos_path, method: :post, class: "share-video-form" do |form| %>
+        <div class="row">
+          <div class="col-sm-3 d-flex align-items-center">
+            <div class="title">
+              <span>Title:</span>
+            </div>
+          </div>
+          <div class="col-sm-6 d-flex align-items-center justify-content-center inputs">
+            <div class="item">
+              <%= form.text_field :title, class: "form-control", placeholder: "Video title" %>
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 d-flex align-items-center">
+            <div class="title">
+              <span>Video url:</span>
+            </div>
+          </div>
+          <div class="col-sm-6 d-flex align-items-center justify-content-center inputs">
+            <div class="item">
+              <%= form.text_field :video_url, class: "form-control", placeholder: "Video url" %>
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 d-flex align-items-center">
+            <div class="title">
+              <span>Description:</span>
+            </div>
+          </div>
+          <div class="col-sm-6 d-flex align-items-center justify-content-center inputs">
+            <div class="item">
+              <%= form.text_area :description, class: "form-control", placeholder: "Description" %>
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 d-flex align-items-center">
+            <div class="title">
+            </div>
+          </div>
+          <div class="col-sm-6 d-flex align-items-center justify-content-center inputs">
+            <div class="item">
+              <%= form.submit "Submit", class: "btn btn-primary" %>
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+      <% end %>
+    </fieldset>
+  </div>
+</div>

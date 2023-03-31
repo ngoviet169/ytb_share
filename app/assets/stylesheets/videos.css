@@ -1,0 +1,42 @@
+.share-video-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 100px 0;
+}
+
+.share-video-page .form {
+    width: 750px;
+}
+
+.reset {
+    all: revert;
+}
+
+fieldset {
+    padding: 40px 20px !important;
+    border-radius: 5px !important;
+}
+
+legend {
+    color: blue !important;
+    font-weight: bold !important;
+}
+
+.inputs {
+    flex-direction: column;
+}
+
+.inputs .item {
+    margin: 5px 0;
+    width: 100%;
+}
+
+.inputs textarea {
+    resize: none;
+}
+
+.share-video-form input {
+    width: 100%;
+}
+
