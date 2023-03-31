@@ -7,6 +7,13 @@ class Video < ApplicationRecord
   belongs_to :user
   has_many :video_reacts, class_name: 'VideoReact', foreign_key: 'video_id'
 
+  scope :search_by_title_and_desc, ->(keyword) {
+    where("videos.title like ? or videos.description like ?",
+          "%#{sanitize_sql_like(keyword)}%",
+          "%#{sanitize_sql_like(keyword)}%"
+    )
+  }
+
   def video_url
     "https://www.youtube.com/embed/#{self.ytb_video_id}"
   end

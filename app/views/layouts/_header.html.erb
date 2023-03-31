@@ -7,8 +7,8 @@
         </a>
         <strong class="text-white">Funny Movies</strong>
       </div>
-      <form role="search" id="search-video">
-        <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+      <form role="search" id="search-video" method="get" action="<%= home_index_path %>">
+        <input type="search" name="search_value" value="<%= @search_value %>" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
       </form>
       <div class="user-action-menu d-flex justify-content-end align-items-center">
         <% if logged_in? %>

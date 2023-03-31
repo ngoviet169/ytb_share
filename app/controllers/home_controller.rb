@@ -3,6 +3,11 @@ class HomeController < ApplicationController
   before_action :check_video_react, only: [:like_video, :dislike_video]
   def index
     @videos = Video.includes(:user, :video_reacts)
+    @search_value = params[:search_value]
+
+    if @search_value.present?
+      @videos = @videos.search_by_title_and_desc(@search_value)
+    end
   end
 
   def like_video
