@@ -11,8 +11,10 @@
               </div>
             </div>
             <div class="col-md-4 item info">
-              <div class="video-title">
+              <div class="video-title d-flex justify-content-between">
                 <span><%= video.title %></span>
+                <input type="hidden" value="<%= video_path(video.id) %>" class="delete-video-url">
+                <button type="button" class="btn-close btn-delete-video"></button>
               </div>
               <div class="video-auth">
                 <span>Share by: <%= video.auth %></span>

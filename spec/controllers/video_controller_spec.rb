@@ -170,4 +170,60 @@ RSpec.describe VideosController, type: :controller do
     end
   end
 
+  describe 'DELETE #destroy' do
+    let(:video) { FactoryBot.create(:video, user_id: user.id) }
+    let(:request_param) {{ id: video.id }}
+
+    context "delete success" do
+      before do
+        delete :destroy, params: request_param, format: "text/plain"
+      end
+
+      it 'http status 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it "delete video success" do
+        result = JSON.parse(response.body)
+        expect(result['status']).to eq true
+      end
+    end
+
+    context "delete fail with invalid video id" do
+      before do
+        request_param[:id] = video.id + 999999
+        delete :destroy, params: request_param, format: "text/plain"
+      end
+
+      it 'http status 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it "delete video success" do
+        result = JSON.parse(response.body)
+        expect(result['status']).to eq false
+        expect(result['message']).to eq('Video not found!')
+      end
+    end
+
+    context "delete fail with not own video" do
+      let(:user1) { FactoryBot.create(:user, email: 'user1@test.com' ) }
+      let(:video) { FactoryBot.create(:video, user_id: (user1.id)) }
+      before do
+        request_param[:id] = video.id
+        delete :destroy, params: request_param, format: "text/plain"
+      end
+
+      it 'http status 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it "delete video success" do
+        result = JSON.parse(response.body)
+        expect(result['status']).to eq false
+        expect(result['message']).to eq("You are not video's owner!")
+      end
+    end
+  end
+
 end

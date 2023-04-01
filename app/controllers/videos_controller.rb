@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
   before_action :require_login
+  before_action :can_delete_video, only: [:destroy]
 
   def new
   end
@@ -20,7 +21,23 @@ class VideosController < ApplicationController
     end
   end
 
+  def destroy
+    if @video.delete
+      return render json: { status: true}
+    end
+
+    render json: { status: false}
+  end
+
   private
+
+  def can_delete_video
+    @video = Video.find_by(id: params[:id])
+
+    return render json: { status: false, message: "Video not found!"} unless @video
+
+    render json: { status: false, message: "You are not video's owner!" } unless @video.user_id.eql?(current_user.id)
+  end
 
   def get_ytb_video_id
     return if params[:ytb_video_id].blank?
