@@ -18,46 +18,29 @@
                 <span>Share by: <%= video.auth %></span>
               </div>
               <div class="react d-flex align-items-center">
-                <% if logged_in? && video.reacted?(current_user) %>
-                  <% if video.liked? current_user %>
-                    <div class="total-like">
-                      <a href="<%= like_video_path(video.id) %>">
-                        <%= thumb_up_filled %>
-                      </a>
-                      <%= video.total_like %>
-                    </div>
-                    <div>
-                      <a href="<%= dislike_video_path(video.id) %>">
-                        <%= thumb_down %>
-                      </a>
-                      <%= video.total_dislike %>
-                    </div>
-                  <% else %>
-                    <div class="total-like">
-                      <a href="<%= like_video_path(video.id) %>">
-                        <%= thumb_up %>
-                      </a>
-                      <%= video.total_like %>
-                    </div>
-                    <div>
-                      <a href="<%= dislike_video_path(video.id) %>">
-                        <%= thumb_down_filled %>
-                      </a>
-                      <%= video.total_dislike %>
-                    </div>
-                  <% end %>
-                <% else %>
-                  <div class="total-like">
-                    <a href="<%= like_video_path(video.id) %>">
-                      <%= thumb_up %>
-                    </a>
-                    <%= video.total_like %>
+                <% if logged_in? %>
+                  <div class="action">
+                    <input type="hidden" value="<%= like_video_path(video.id) %>" class="react-video-url">
+                    <a href="javascript:void(0)" class="like <%= video.liked?(current_user) ? 'display-none' : '' %>"><%= thumb_up %></a>
+                    <a href="javascript:void(0)" class="liked <%= video.liked?(current_user) ? '' : 'display-none' %>"><%= thumb_up_filled %></a>
+                    <span class="total-like"><%= video.total_like %></span>
                   </div>
-                  <div>
-                    <a href="<%= dislike_video_path(video.id) %>">
-                      <%= thumb_down %>
-                    </a>
-                    <%= video.total_dislike %>
+                  <div class="action">
+                    <input type="hidden" value="<%= dislike_video_path(video.id) %>" class="react-video-url">
+                    <a href="javascript:void(0)" class="dislike <%= video.disliked?(current_user) ? 'display-none' : '' %>"><%= thumb_down %></a>
+                    <a href="javascript:void(0)" class="disliked <%= video.disliked?(current_user) ? '' : 'display-none' %>"><%= thumb_down_filled %></a>
+                    <span class="total-dislike"><%= video.total_dislike %></span>
+                  </div>
+                <% else %>
+                  <div class="action">
+                    <input type="hidden" value="<%= like_video_path(video.id) %>" class="react-video-url">
+                    <a href="javascript:void(0)" class="like"><%= thumb_up %></a>
+                    <span class="total-like"><%= video.total_like %></span>
+                  </div>
+                  <div class="action">
+                    <input type="hidden" value="<%= dislike_video_path(video.id) %>" class="react-video-url">
+                    <a href="javascript:void(0)" class="dislike"><%= thumb_down %></a>
+                    <span class="total-dislike"><%= video.total_dislike %></span>
                   </div>
                 <% end %>
               </div>

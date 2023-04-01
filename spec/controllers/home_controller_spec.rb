@@ -37,8 +37,8 @@ RSpec.describe HomeController, type: :controller do
       get :like_video, params: request_param, format: "text/plain"
     end
 
-    it 'http status 302 redirect' do
-      expect(response).to have_http_status(302)
+    it 'http status 200' do
+      expect(response).to have_http_status(200)
     end
 
     it 'create video_reacts' do
@@ -55,8 +55,8 @@ RSpec.describe HomeController, type: :controller do
       get :dislike_video, params: request_param, format: "text/plain"
     end
 
-    it 'http status 302 redirect' do
-      expect(response).to have_http_status(302)
+    it 'http status 200' do
+      expect(response).to have_http_status(200)
     end
 
     it 'create video_reacts' do

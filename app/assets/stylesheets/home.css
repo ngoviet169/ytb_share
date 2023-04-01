@@ -42,3 +42,7 @@
 .react div {
     margin-right: 10px;
 }
+
+.display-none {
+    display: none;
+}

@@ -16,15 +16,15 @@
             <span>Welcome <%= current_user.email %></span>
           </div>
           <%= link_to "Share a movie", new_video_path, :class => "btn btn-outline-light me-2" %>
-          <form action="<%= logout_path %>" method="delete">
+          <%= form_with url: logout_path, method: :delete, local: true, data: {turbo: false} do |form| %>
             <button type="submit" class="btn btn-outline-light me-2">Logout</button>
-          </form>
+          <% end %>
         <% else %>
-          <form class="login-form d-flex justify-content-end" action="<%= login_create_path %>" method="post">
+          <%= form_with url: login_create_path, method: :post, class: "login-form d-flex justify-content-end", local: true, data: {turbo: false} do |form| %>
             <input type="email" name="email" class="form-control form-control-dark text-bg-dark" placeholder="Email">
             <input type="password" name="password" class="form-control form-control-dark text-bg-dark" placeholder="Password">
             <button type="submit" class="btn btn-outline-light me-2">Login / Register</button>
-          </form>
+          <% end %>
         <% end %>
       </div>
     </div>

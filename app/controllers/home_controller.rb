@@ -12,17 +12,17 @@ class HomeController < ApplicationController
 
   def like_video
     handle_video_react(VideoReact::LIKE_ACTION)
-
-    redirect_to home_index_path
   end
 
   def dislike_video
     handle_video_react(VideoReact::DISLIKE_ACTION)
-
-    redirect_to home_index_path
   end
 
   private
+
+  def require_login
+    render json: {status: false, message: "You must login first!"} unless logged_in?
+  end
 
   def handle_video_react(action)
     if @video_react.nil?
@@ -34,6 +34,18 @@ class HomeController < ApplicationController
         @video_react.update(react: action)
       end
     end
+    video = Video.find(params[:video_id])
+
+    render json: {
+      status: true,
+      video: {
+        total_like: video.total_like,
+        total_dislike: video.total_dislike,
+        is_reacted: video.reacted?(current_user),
+        is_liked: video.liked?(current_user),
+        is_disliked: video.disliked?(current_user),
+      }
+    }
   end
 
   def check_video_react
