@@ -10,8 +10,8 @@ RSpec.describe HomeController, type: :controller do
   end
 
   describe 'GET #index' do
-    let!(:video_2) { FactoryBot.create(:video, user_id: user.id) }
-    let!(:video_3) { FactoryBot.create(:video, user_id: user.id) }
+    let!(:video_2) { FactoryBot.create(:video, user_id: user.id, ytb_video_id: 'id-1') }
+    let!(:video_3) { FactoryBot.create(:video, user_id: user.id, ytb_video_id: 'id-2') }
 
     before do
       get :index, format: "text/plain"
@@ -19,6 +19,10 @@ RSpec.describe HomeController, type: :controller do
 
     it 'http status 200' do
       expect(response).to have_http_status(200)
+    end
+
+    it "should render the home index template" do
+      response.should render_template("index")
     end
 
     it 'total video is 3' do

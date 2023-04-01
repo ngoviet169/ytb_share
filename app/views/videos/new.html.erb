@@ -1,8 +1,14 @@
+<% if @errors.present? %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error">
+    <div id="error-content"><%= @video.errors.full_messages.join(", ") %></div>
+    <button type="button" class="btn-close" id="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
 <div class="share-video-page">
   <div class="form">
     <fieldset class="reset">
       <legend class="reset">Share a Youtube movie</legend>
-      <%= form_with model: @video, url: videos_path, method: :post, class: "share-video-form" do |form| %>
+      <%= form_with model: @video, url: videos_path, method: :post, class: "share-video-form", id: "share-video-form", local: true, data: {turbo: false} do |form| %>
         <div class="row">
           <div class="col-sm-3 d-flex align-items-center">
             <div class="title">
@@ -11,7 +17,7 @@
           </div>
           <div class="col-sm-6 d-flex align-items-center justify-content-center inputs">
             <div class="item">
-              <%= form.text_field :title, class: "form-control", placeholder: "Video title" %>
+              <input type="text" name="title" class="form-control <%= @errors&.has_key?('title') ? 'is-invalid' : '' %>" placeholder="Video title" value="<%= @video&.title %>">
             </div>
           </div>
           <div class="col-sm-3"></div>
@@ -24,7 +30,7 @@
           </div>
           <div class="col-sm-6 d-flex align-items-center justify-content-center inputs">
             <div class="item">
-              <%= form.text_field :video_url, class: "form-control", placeholder: "Video url" %>
+              <input type="text" name="ytb_video_id" class="form-control <%= @errors&.has_key?('ytb_video_id') ? 'is-invalid' : '' %>" placeholder="Video url" value="<%= @video&.ytb_video_id %>">
             </div>
           </div>
           <div class="col-sm-3"></div>
@@ -37,7 +43,7 @@
           </div>
           <div class="col-sm-6 d-flex align-items-center justify-content-center inputs">
             <div class="item">
-              <%= form.text_area :description, class: "form-control", placeholder: "Description" %>
+              <textarea name="description" class="form-control <%= @errors&.has_key?('description') ? 'is-invalid' : '' %>" placeholder="Description"><%= @video&.description %></textarea>
             </div>
           </div>
           <div class="col-sm-3"></div>
@@ -49,7 +55,7 @@
           </div>
           <div class="col-sm-6 d-flex align-items-center justify-content-center inputs">
             <div class="item">
-              <%= form.submit "Submit", class: "btn btn-primary" %>
+              <%= form.submit "Submit", class: "btn btn-primary", id: "btn-submit" %>
             </div>
           </div>
           <div class="col-sm-3"></div>
