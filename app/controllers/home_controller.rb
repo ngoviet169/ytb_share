@@ -1,8 +1,11 @@
 class HomeController < ApplicationController
   before_action :require_login, only: [:like_video, :dislike_video]
   before_action :check_video_react, only: [:like_video, :dislike_video]
+
+  PER_PAGE = 5
+
   def index
-    @videos = Video.includes(:user, :video_reacts)
+    @videos = Video.includes(:user, :video_reacts).page(params[:page]).per(PER_PAGE)
     @search_value = params[:search_value]
 
     if @search_value.present?

@@ -8,7 +8,7 @@
   <div class="form">
     <fieldset class="reset">
       <legend class="reset">Share a Youtube movie</legend>
-      <%= form_with model: @video, url: videos_path, method: :post, class: "share-video-form", id: "share-video-form", local: true, data: {turbo: false} do |form| %>
+      <%= form_with model: @video, url: videos_path, method: :post, class: "share-video-form", id: "share-video-form", local: true do |form| %>
         <div class="row">
           <div class="col-sm-3 d-flex align-items-center">
             <div class="title">
